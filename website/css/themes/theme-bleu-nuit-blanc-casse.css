@@ -1,0 +1,50 @@
+/*
+ * THEME: Bleu Nuit Blanc Cassé
+ * Fond blanc cassé chaud (#F5F1E8), héros bleu nuit (#071A2D), accent bleu marine (#1E4D8C)
+ * Prestige sobre, finance & santé premium
+ */
+:root {
+  /* Neutrals → cool navy-inflected scale */
+  --nardo:       #5A6570;
+  --nardo-950:   #071A2D;
+  --nardo-900:   #0E2640;
+  --nardo-800:   #163352;
+  --nardo-700:   #204166;
+  --nardo-500:   #4A6080;
+  --nardo-400:   #7090A8;
+  --nardo-300:   #9AB0C4;
+  --nardo-200:   #C2D0DC;
+  --nardo-100:   #DDE6EE;
+  --nardo-50:    #EEF3F8;
+
+  /* Accent → mid-navy blue */
+  --gold:        #1E4D8C;
+  --gold-dark:   #163A72;
+  --gold-deep:   #0F2B58;
+  --gold-light:  #3A70B8;
+  --gold-shine:  #6090D4;
+  --gold-100:    #DCE8F8;
+  --gold-50:     #EEF4FC;
+  --gold-glow:   rgba(30,77,140,0.10);
+  --gold-subtle: rgba(30,77,140,0.05);
+
+  /* Backgrounds — blanc cassé chaud */
+  --bg-primary:   #F5F1E8;
+  --bg-secondary: #EAE6DB;
+  --bg-card:      #FFFCF4;
+  --bg-dark:      #071A2D;
+
+  /* Text */
+  --text-primary:   #071A2D;
+  --text-secondary: #1E3A5F;
+  --text-muted:     #4A6080;
+  --text-on-dark:   #F5F1E8;
+
+  /* Accent alias */
+  --accent: var(--gold);
+  --gradient-gold: linear-gradient(135deg, #163A72, #3A70B8);
+
+  /* Borders */
+  --border-light:  rgba(30,77,140,0.10);
+  --border-medium: rgba(30,77,140,0.18);
+}

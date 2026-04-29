@@ -3,24 +3,383 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScalpCare SMP — Micropigmentation Capillaire | Paris & Barcelona</title>
-  <meta name="description" content="ScalpCare SMP, expert en tricopigmentation à Paris et Barcelone. Restauration capillaire non chirurgicale.">
+  <title>Scalpcare — Micropigmentation Capillaire | Paris & Barcelona</title>
+  <meta name="description" content="Scalpcare, expert en tricopigmentation à Paris et Barcelone. Restauration capillaire non chirurgicale.">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="img/logo.png">
+
+  <style>
+    .blog-grid.blog-grid-premium { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .blog-card-excerpt { margin: 0; color: var(--text-light); line-height: 1.75; min-height: 0; }
+    .blog-card-actions { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:auto; }
+    .blog-card-link.is-button { padding: 0; border: 0; background: transparent; cursor: pointer; font: inherit; }
+    .blog-card-link.is-button:hover { opacity: .85; }
+    .blog-card-link.is-button:focus-visible { outline: 2px solid rgba(197,165,90,.55); outline-offset: 6px; border-radius: 999px; }
+    .blog-card-note { font-size: .9rem; color: var(--muted); }
+
+    .blog-modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(10,12,15,.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility .3s ease; z-index: 1200; }
+    .blog-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    .blog-modal-panel { width: min(860px, 100%); max-height: min(88vh, 920px); overflow: auto; border-radius: 28px; background: linear-gradient(180deg, #FFFDF8 0%, #FFFFFF 100%); border: 1px solid rgba(197,165,90,.18); box-shadow: 0 30px 80px rgba(0,0,0,.22); padding: 28px; position: relative; color: #1C2128; }
+    .blog-modal-close { position: sticky; top: 0; margin-left: auto; width: 46px; height: 46px; border-radius: 999px; border: 1px solid rgba(28,33,40,.12); background: rgba(255,255,255,.96); color: #1C2128; display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .blog-modal-head { display: grid; gap: 12px; margin-bottom: 22px; }
+    .blog-modal-eyebrow { display:inline-flex; width: fit-content; padding: 8px 12px; border-radius: 999px; background: rgba(197,165,90,.12); color: #e5cf95; border: 1px solid rgba(197,165,90,.22); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+    .blog-modal-title { margin: 0; font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.12; color: #11161B; font-family: var(--font-display); font-weight: 800; }
+    .blog-modal-sub { margin: 0; color: #5E6772; line-height: 1.8; }
+    .blog-modal-body { display: grid; gap: 18px; color: #25303A; line-height: 1.85; }
+    .blog-modal-body h4 { margin: 0 0 8px; color: #11161B; font-size: 1.02rem; }
+    .blog-modal-body p, .blog-modal-body ul, .blog-modal-body ol { margin: 0; }
+    .blog-modal-body ul, .blog-modal-body ol { padding-left: 20px; display:grid; gap:10px; }
+    .blog-modal-body strong { color: #11161B; }
+
+    @media (max-width: 1080px) {
+      .blog-grid.blog-grid-premium { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .kit-highlight-card { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .blog-grid.blog-grid-premium { grid-template-columns: 1fr !important; }
+      .blog-modal { padding: 16px; }
+      .blog-modal-panel { padding: 22px 18px; border-radius: 22px; }
+      .kit-highlight-card { padding: 22px; }
+    }
+  
+    
+    .hero.hero-photo{
+      position:relative;
+      min-height:calc(100svh - 6px);
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      isolation:isolate;
+      background:
+        linear-gradient(90deg, rgba(12,14,18,.70) 0%, rgba(12,14,18,.42) 28%, rgba(12,14,18,.16) 56%, rgba(12,14,18,.08) 100%),
+        linear-gradient(180deg, rgba(12,14,18,.18) 0%, rgba(12,14,18,.08) 38%, rgba(12,14,18,.14) 100%),
+        url('img/hero-procedure-photo.png') 72% 46% / contain no-repeat,
+        linear-gradient(180deg, #2B2E34 0%, #181B20 100%);
+      padding-top: 104px;
+    }
+    .hero.hero-photo::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(15,18,22,.42) 0%, rgba(15,18,22,0) 16%, rgba(15,18,22,0) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .hero.hero-photo::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 78% 14%, rgba(255,255,255,.05), transparent 14%),
+        linear-gradient(180deg, rgba(0,0,0,0) 58%, rgba(0,0,0,.08) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .hero.hero-photo .container{
+      position:relative;
+      z-index:1;
+      width:100%;
+    }
+    .hero.hero-photo .hero-content{
+      max-width: 640px;
+      padding-top: 84px;
+      padding-bottom: 94px;
+      margin-top: 0;
+    }
+    .hero.hero-photo .hero-title,
+    .hero.hero-photo h1,
+    .hero.hero-photo .hero-content h1{
+      max-width: 10.5ch;
+      text-wrap: balance;
+      margin-top: 0;
+    }
+    .hero.hero-photo .hero-title .brand-gold{
+      color: var(--gold);
+      display: inline;
+    }
+    .hero.hero-photo .hero-label{
+      display:none !important;
+    }
+    .hero.hero-photo .hero-stats{
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    @media (max-width:1180px){
+      .hero.hero-photo{
+        background:
+          linear-gradient(90deg, rgba(12,14,18,.72) 0%, rgba(12,14,18,.48) 34%, rgba(12,14,18,.18) 100%),
+          linear-gradient(180deg, rgba(12,14,18,.18) 0%, rgba(12,14,18,.10) 100%),
+          url('img/hero-procedure-photo.png') 74% 50% / cover no-repeat;
+        padding-top: 96px;
+      }
+      .hero.hero-photo .hero-content{
+        max-width: 580px;
+        padding-top: 72px;
+        padding-bottom: 84px;
+      }
+    }
+    @media (max-width:900px){
+      .hero.hero-photo{
+        min-height: 92svh;
+        background:
+          linear-gradient(180deg, rgba(12,14,18,.72) 0%, rgba(12,14,18,.38) 34%, rgba(12,14,18,.56) 100%),
+          url('img/hero-procedure-photo.png') 68% center / cover no-repeat;
+        padding-top: 92px;
+      }
+      .hero.hero-photo .hero-content{
+        max-width: 100%;
+        padding-top: 58px;
+        padding-bottom: 72px;
+      }
+      .hero.hero-photo .hero-title,
+      .hero.hero-photo h1,
+      .hero.hero-photo .hero-content h1{
+        max-width: 11.5ch;
+      }
+    }
+    @media (max-width:720px){
+      .hero.hero-photo{
+        min-height: 88svh;
+        background:
+          linear-gradient(180deg, rgba(12,14,18,.76) 0%, rgba(12,14,18,.42) 30%, rgba(12,14,18,.58) 100%),
+          url('img/hero-procedure-photo.png') 74% center / cover no-repeat;
+        padding-top: 86px;
+      }
+      .hero.hero-photo .hero-content{
+        padding-top: 44px;
+        padding-bottom: 56px;
+      }
+      .hero.hero-photo .hero-stats{
+        background:transparent !important;
+      }
+    }
+
+    /* === HERO TITLE — EDITORIAL PREMIUM (Cormorant Garamond) === */
+    .hero.hero-photo .hero-title,
+    .hero.hero-photo h1,
+    .hero.hero-photo .hero-content h1 {
+      font-family: 'Cormorant Garamond', 'Didot', Georgia, serif !important;
+      font-size: clamp(2.4rem, 3.8vw, 4rem) !important;
+      font-weight: 700 !important;
+      line-height: 1.16 !important;
+      letter-spacing: -0.01em !important;
+      max-width: 600px !important;
+      text-wrap: balance;
+      margin-bottom: 32px !important;
+    }
+    .hero-title-line1 {
+      display: block;
+      font-weight: 700;
+      color: var(--text-on-dark);
+    }
+    .hero-title-line2 {
+      display: block;
+      font-size: 0.52em;
+      font-weight: 400;
+      color: rgba(200,200,200,0.80);
+      margin-top: 18px;
+      line-height: 1.55;
+      font-style: italic;
+      letter-spacing: 0.01em;
+    }
+
+    /* === MOBILE HERO — plus compact === */
+    @media (max-width: 720px) {
+      .hero.hero-photo {
+        min-height: 72svh !important;
+      }
+      .hero.hero-photo .hero-content {
+        padding-top: 18px !important;
+        padding-bottom: 26px !important;
+      }
+      .hero.hero-photo .hero-title,
+      .hero.hero-photo h1,
+      .hero.hero-photo .hero-content h1 {
+        font-size: clamp(1.7rem, 6.5vw, 2.2rem) !important;
+        max-width: none !important;
+        margin-bottom: 22px !important;
+      }
+      .hero-title-line2 {
+        font-size: 0.62em;
+        margin-top: 10px;
+      }
+      .hero-cta {
+        margin-bottom: 28px !important;
+      }
+    }
+
+    /* === BRAND STATEMENT — compact mobile === */
+    @media (max-width: 720px) {
+      .brand-statement {
+        padding: 56px 0 !important;
+      }
+      .brand-statement blockquote {
+        font-size: clamp(1.0rem, 4vw, 1.25rem) !important;
+        line-height: 1.65 !important;
+      }
+      .brand-statement .section-subtitle {
+        font-size: 0.88rem !important;
+        line-height: 1.65 !important;
+      }
+      .brand-statement-divider {
+        margin: 22px auto !important;
+      }
+    }
+
+    /* === SERVICES — images procédures === */
+    .service-interactive-item {
+      display: flex !important;
+      gap: 28px !important;
+      align-items: center !important;
+    }
+    .service-interactive-main {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+      flex: 1;
+    }
+    .service-img-wrap {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(197,165,90,0.15);
+      flex-shrink: 0;
+    }
+    .service-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .service-img-placeholder {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #E8EAEB, #D5D8DA);
+      border: 1px solid rgba(197,165,90,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 1.6rem;
+    }
+    @media (max-width: 640px) {
+      .service-interactive-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        display: grid !important;
+        grid-template-columns: auto 1fr !important;
+        gap: 32px !important;
+      }
+      .service-img-wrap,
+      .service-img-placeholder { display: none !important; }
+    }
+
+    /* === KIT DERMO FIX — compact === */
+    .kit-compact-card {
+      background: linear-gradient(180deg, #FFFDF7 0%, #FFFFFF 100%);
+      border: 1px solid rgba(197,165,90,0.16);
+      border-radius: 24px;
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.07);
+    }
+    .kit-compact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(197,165,90,0.08), transparent 45%);
+      pointer-events: none;
+    }
+    .kit-compact-left { position: relative; z-index: 1; }
+    .kit-compact-kicker {
+      display: inline-flex;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(197,165,90,0.10);
+      color: #e5cf95;
+      border: 1px solid rgba(197,165,90,0.20);
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .kit-compact-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.18;
+      color: #11161B;
+    }
+    .kit-compact-right { position: relative; z-index: 1; }
+    .kit-compact-items {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .kit-compact-items li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(197,165,90,0.05);
+      border: 1px solid rgba(197,165,90,0.10);
+      color: #3A3C3E;
+      font-size: .88rem;
+      line-height: 1.5;
+    }
+    .kit-compact-items li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .kit-compact-card {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+        gap: 20px;
+      }
+    }
+
+  </style>
+
 </head>
 <body>
-  <div class="loader"><div class="loader-inner"><div class="loader-logo"><img src="img/logo.png" alt="ScalpCare SMP"></div><div class="loader-bar"><div class="loader-bar-inner"></div></div></div></div>
+  <div class="loader"><div class="loader-inner"><div class="loader-logo"><img src="img/logo.png" alt="Scalpcare"></div><div class="loader-bar"><div class="loader-bar-inner"></div></div></div></div>
   <div class="header-lines"><span></span><span></span><span></span></div>
 
   <!-- HEADER -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="#accueil" class="logo"><img src="img/logo.png" alt="ScalpCare SMP"></a>
+      <a href="#accueil" class="logo"><img src="img/logo.png" alt="Scalpcare"></a>
       <nav class="main-nav">
         <a href="#accueil" class="active" data-i18n="nav_home">Accueil</a>
         <a href="#about" data-i18n="nav_about">Qui suis-je</a>
         <a href="#services" data-i18n="nav_services">Notre Offre</a>
-        <a href="#tarifs" data-i18n="nav_pricing">Tarifs</a>
+        <a href="tarifs.html" data-i18n="nav_pricing">Tarifs</a>
+        <a href="avant-apres.html" data-i18n="nav_beforeafter">Avant / Après</a>
         <a href="#blog" data-i18n="nav_blog">Blog</a>
         <a href="#faq" data-i18n="nav_faq">FAQ</a>
       </nav>
@@ -37,7 +396,8 @@
 
   <!-- MOBILE NAV -->
   <div class="mobile-nav">
-    <a href="#accueil" data-i18n="nav_home">Accueil</a><a href="#about" data-i18n="nav_about">Qui suis-je</a><a href="#services" data-i18n="nav_services">Notre Offre</a><a href="#tarifs" data-i18n="nav_pricing">Tarifs</a><a href="#blog" data-i18n="nav_blog">Blog</a><a href="#faq" data-i18n="nav_faq">FAQ</a>
+    <a href="#accueil" data-i18n="nav_home">Accueil</a><a href="#about" data-i18n="nav_about">Qui suis-je</a><a href="#services" data-i18n="nav_services">Notre Offre</a><a href="tarifs.html" data-i18n="nav_pricing">Tarifs</a>
+        <a href="avant-apres.html" data-i18n="nav_beforeafter">Avant / Après</a><a href="#blog" data-i18n="nav_blog">Blog</a><a href="#faq" data-i18n="nav_faq">FAQ</a>
     <div class="mobile-nav-social">
       <a href="https://www.instagram.com/scalpcare_smp/" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
       <a href="https://tr.ee/dnSKLbgcec" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
@@ -45,19 +405,13 @@
   </div>
 
   <!-- HERO -->
-  <section class="hero" id="accueil">
+  <section class="hero hero-photo" id="accueil">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-label" data-i18n="hero_label">Micropigmentation Capillaire — Paris & Barcelona</div>
-        <h1 data-i18n="hero_title"><strong>ScalpCare SMP</strong>, expert en tricopigmentation</h1>
+        <h1 class="hero-title" data-i18n="hero_title"><span class="hero-title-line1">Micropigmentation,<br>retrouvez confiance en vous.</span><span class="hero-title-line2">Offrez-vous une solution naturelle et durable pour redensifier votre cuir chevelu.</span></h1>
         <div class="hero-cta">
           <a href="#diagnostic" class="btn btn-primary" data-i18n="hero_cta_rdv">Diagnostic gratuit</a>
           <a href="#services" class="btn btn-outline" data-i18n="hero_cta_discover">Découvrir</a>
-        </div>
-        <div class="hero-stats">
-          <div class="hero-stat"><h3 data-i18n="hero_stat_1_num">500+</h3><p data-i18n="hero_stat_1_label">Clients satisfaits</p></div>
-          <div class="hero-stat"><h3 data-i18n="hero_stat_2_num">7 ans</h3><p data-i18n="hero_stat_2_label">D'expérience</p></div>
-          <div class="hero-stat"><h3 data-i18n="hero_stat_3_num">100%</h3><p data-i18n="hero_stat_3_label">Sur mesure</p></div>
         </div>
       </div>
     </div>
@@ -66,9 +420,74 @@
   <!-- BRAND STATEMENT -->
   <section class="brand-statement">
     <div class="container reveal">
-      <blockquote data-i18n="brand_text">La micropigmentation capillaire est aujourd'hui <strong>la technique de restauration capillaire non chirurgicale la plus efficace</strong> pour celles et ceux qui souhaitent se débarrasser de la calvitie et retrouver volume et densité capillaire. Chez ScalpCare SMP, nous recréons l'effet de cheveux rasés ou très courts, densifions les zones clairsemées et camouflons les cicatrices. <strong>Le résultat est naturel et durable</strong>, grâce à une reproduction fidèle de vos follicules pileux.</blockquote>
+      <blockquote data-i18n="brand_text">La micropigmentation capillaire est aujourd'hui <strong>la technique de restauration capillaire non chirurgicale la plus efficace</strong> pour celles et ceux qui souhaitent se débarrasser de la calvitie et retrouver volume et densité capillaire. Chez Scalpcare, nous recréons l'effet de cheveux rasés ou très courts, densifions les zones clairsemées et camouflons les cicatrices. <strong>Le résultat est naturel et durable</strong>, grâce à une reproduction fidèle de vos follicules pileux.</blockquote>
       <div class="brand-statement-divider"></div>
       <p class="section-subtitle" style="margin:0 auto;text-align:center" data-i18n="brand_text_2">Que vous souhaitiez retrouver confiance en vous ou redéfinir votre style, notre expertise vous garantit une transformation sur mesure, parfaitement adaptée à vos besoins et attentes.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="bg-alt" id="services">
+    <div class="container">
+      <div class="section-header reveal"><div class="section-label" data-i18n="svc_label">Notre offre</div><h2 class="section-title" data-i18n="svc_title"><span class="title-bold">Des solutions sur mesure</span></h2><p class="section-subtitle" data-i18n="svc_subtitle">Découvrez nos prestations de micropigmentation capillaire.</p></div>
+      <div class="reveal">
+        <div class="service-interactive-item"><div class="service-number">01</div><div class="service-interactive-content"><h3 data-i18n="svc_1_title">Effet Rasé / Shaved Look</h3><p data-i18n="svc_1_desc">Recréation complète d'un look rasé naturel. Idéal pour les hommes souffrant de calvitie avancée. Nous reproduisons fidèlement l'apparence de follicules pileux pour un résultat bluffant.</p></div><div class="service-img-wrap"><img src="img/svc-effet-rase.jpg" alt="Effet rasé - micropigmentation capillaire"></div></div>
+        <div class="service-interactive-item"><div class="service-number">02</div><div class="service-interactive-content"><h3 data-i18n="svc_3_title">Restauration de Cicatrices</h3><p data-i18n="svc_3_desc">Restauration des cicatrices de greffe FUE/FUT ou d'autres interventions. La micropigmentation permet de rendre les cicatrices quasi invisibles en reproduisant la texture capillaire environnante.</p></div><div class="service-img-wrap"><img src="img/svc-cicatrices.jpg" alt="Restauration de cicatrices - micropigmentation capillaire"></div></div>
+        <div class="service-interactive-item"><div class="service-number">03</div><div class="service-interactive-content"><h3 data-i18n="svc_4_title">Densification</h3><p data-i18n="svc_4_desc">Solutions adaptées à tous. Densification des zones clairsemées, traitement de l'alopécie, restitution du volume capillaire. Résultats subtils et naturels.</p></div><div class="service-img-wrap"><img src="img/svc-densification.jpg" alt="Densification capillaire - micropigmentation"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KIT DERMO FIX -->
+  <section class="bg-light" id="kit-dermo-fix" style="padding:72px 0;">
+    <div class="container">
+      <div class="kit-compact-card reveal">
+        <div class="kit-compact-left">
+          <span class="kit-compact-kicker">Accompagnement post-procédure</span>
+          <h2 class="kit-compact-title">Kit Dermo Fix<br>offert lors de la<br>première séance</h2>
+        </div>
+        <div class="kit-compact-right">
+          <ul class="kit-compact-items">
+            <li>Shampooing doux sans sulfates</li>
+            <li>Crème cicatrisante</li>
+            <li>Fiche de suivi</li>
+            <li>Crème matifiante pour l'après cicatrisation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="bg-light" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal"><img src="img/samuel.webp" alt="Scalpcare - Praticien"><div class="about-image-accent"></div></div>
+        <div class="about-content reveal">
+          <div class="section-label" data-i18n="about_label">Qui suis-je</div>
+          <h2 data-i18n="about_title"><span class="title-bold">Votre praticien certifié</span></h2>
+          <p class="about-text" data-i18n="about_text_1">Passionné par la micropigmentation capillaire depuis plus de 7 ans, j'ai développé une expertise unique dans la restauration capillaire non chirurgicale.</p>
+          <p class="about-text" data-i18n="about_text_2">Formé auprès des meilleurs praticiens internationaux, je mets mon savoir-faire au service de chaque client pour des résultats naturels et personnalisés.</p>
+          <p class="about-text" data-i18n="about_text_3">Mon approche est centrée sur l'écoute et la compréhension de vos besoins. Chaque procédure est unique. Je m'engage à vous offrir une communication réactive et un accompagnement personnalisé à chaque étape de votre parcours.</p>
+          <div class="about-signature"><div class="about-signature-name" data-i18n="about_name">Scalpcare</div><div class="about-signature-role" data-i18n="about_role">Praticien certifié — Paris & Barcelona</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- PRICING PREVIEW -->
+  <section class="bg-light" id="tarifs-apercu">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="section-label" data-i18n="price_preview_label">Tarifs</div>
+        <h2 class="section-title" data-i18n="price_preview_title"><span class="title-bold">Une lecture claire et </span><strong>premium</strong><span class="title-bold"> de nos prestations</span></h2>
+        <p class="section-subtitle" data-i18n="price_preview_subtitle">Visualisez les principales zones traitées, comprenez immédiatement les prestations proposées et accédez à la page dédiée pour découvrir tous les tarifs dans une présentation plus détaillée, plus rassurante et plus haut de gamme.</p>
+      </div>
+      <div class="reveal" style="display:flex;justify-content:center;">
+        <a href="tarifs.html" class="btn btn-primary" data-i18n="price_preview_cta">Voir la page tarifs</a>
+      </div>
     </div>
   </section>
 
@@ -77,7 +496,7 @@
     <div class="container">
       <div class="section-header center reveal">
         <div class="section-label" data-i18n="eng_label">Nos engagements</div>
-        <h2 class="section-title" data-i18n="eng_title">Une approche <strong>premium</strong> à chaque étape</h2>
+        <h2 class="section-title" data-i18n="eng_title"><span class="title-bold">Une approche </span><strong>premium</strong><span class="title-bold"> à chaque étape</span></h2>
         <p class="section-subtitle" data-i18n="eng_subtitle">Chaque procédure est réalisée avec la plus grande attention aux détails.</p>
       </div>
       <div class="engagements-grid">
@@ -93,124 +512,77 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="bg-light" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image reveal"><img src="img/samuel.webp" alt="ScalpCare SMP - Praticien"><div class="about-image-accent"></div></div>
-        <div class="about-content reveal">
-          <div class="section-label" data-i18n="about_label">Qui suis-je</div>
-          <h2 data-i18n="about_title">Votre praticien <strong>certifié</strong></h2>
-          <p class="about-text" data-i18n="about_text_1">Passionné par la micropigmentation capillaire depuis plus de 7 ans, j'ai développé une expertise unique dans la restauration capillaire non chirurgicale.</p>
-          <p class="about-text" data-i18n="about_text_2">Formé auprès des meilleurs praticiens internationaux, je mets mon savoir-faire au service de chaque client pour des résultats naturels et personnalisés.</p>
-          <p class="about-text" data-i18n="about_text_3">Mon approche est centrée sur l'écoute et la compréhension de vos besoins. Chaque procédure est unique. Je m'engage à vous offrir une communication réactive et un accompagnement personnalisé à chaque étape de votre parcours.</p>
-          <div class="about-signature"><div class="about-signature-name" data-i18n="about_name">ScalpCare SMP</div><div class="about-signature-role" data-i18n="about_role">Praticien certifié — Paris & Barcelona</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- SERVICES -->
-  <section class="bg-alt" id="services">
-    <div class="container">
-      <div class="section-header reveal"><div class="section-label" data-i18n="svc_label">Notre offre</div><h2 class="section-title" data-i18n="svc_title">Des solutions <strong>sur mesure</strong></h2><p class="section-subtitle" data-i18n="svc_subtitle">Découvrez nos prestations de micropigmentation capillaire.</p></div>
-      <div class="reveal">
-        <div class="service-interactive-item"><div class="service-number">01</div><div class="service-interactive-content"><h3 data-i18n="svc_1_title">Effet Rasé / Shaved Look</h3><p data-i18n="svc_1_desc">Recréation complète d'un look rasé naturel. Idéal pour les hommes souffrant de calvitie avancée.</p></div></div>
-        <div class="service-interactive-item"><div class="service-number">02</div><div class="service-interactive-content"><h3 data-i18n="svc_2_title">Densification Capillaire</h3><p data-i18n="svc_2_desc">Ajout de densité visuelle dans les zones clairsemées.</p></div></div>
-        <div class="service-interactive-item"><div class="service-number">03</div><div class="service-interactive-content"><h3 data-i18n="svc_3_title">Restauration de Cicatrices</h3><p data-i18n="svc_3_desc">Restauration des cicatrices de greffe FUE/FUT ou d'autres interventions. La micropigmentation permet de rendre les cicatrices quasi invisibles en reproduisant la texture capillaire environnante.</p></div></div>
-        <div class="service-interactive-item"><div class="service-number">04</div><div class="service-interactive-content"><h3 data-i18n="svc_4_title">Densification</h3><p data-i18n="svc_4_desc">Solutions adaptées à tous. Densification des zones clairsemées, traitement de l'alopécie, restitution du volume capillaire.</p></div></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- PRICING with interactive SVG face plans -->
-  <section class="bg-light" id="tarifs">
-    <div class="container">
-      <div class="section-header center reveal"><div class="section-label" data-i18n="price_label">Tarifs</div><h2 class="section-title" data-i18n="price_title">Nos <strong>tarifs</strong></h2><p class="section-subtitle" data-i18n="price_subtitle">Sélectionnez une zone pour découvrir le tarif correspondant.</p></div>
-      <div class="pricing-layout reveal">
-        <!-- Interactive SVG Face Plans -->
-        <div class="face-plans-container">
-          <div class="face-plans">
-            <!-- FRONT VIEW -->
-            <div class="face-plan">
-              <h4>Vue de face</h4>
-              <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="face-svg">
-                <!-- Head outline -->
-                <path d="M150 30 C95 30 55 70 50 130 C47 165 48 190 55 220 C60 240 70 265 85 285 C100 305 120 330 150 345 C180 330 200 305 215 285 C230 265 240 240 245 220 C252 190 253 165 250 130 C245 70 205 30 150 30Z" fill="#3A3C3E" stroke="#62666A" stroke-width="1"/>
-                <!-- Zone: Top of head (Effet Rasé/Densité) -->
-                <path class="face-zone" data-zone="density" d="M150 32 C100 32 65 65 57 120 L100 125 C105 80 125 55 150 50 C175 55 195 80 200 125 L243 120 C235 65 200 32 150 32Z" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <!-- Zone: Frontal / Temples -->
-                <path class="face-zone" data-zone="frontal" d="M57 120 L100 125 L95 165 L52 160 C49 145 48 132 57 120Z" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <path class="face-zone" data-zone="frontal" d="M243 120 L200 125 L205 165 L248 160 C251 145 252 132 243 120Z" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <!-- Zone: Crown -->
-                <ellipse class="face-zone" data-zone="crown" cx="150" cy="80" rx="50" ry="30" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <!-- Facial features (non-interactive) -->
-                <ellipse cx="120" cy="185" rx="15" ry="8" fill="#2E3032"/>
-                <ellipse cx="180" cy="185" rx="15" ry="8" fill="#2E3032"/>
-                <path d="M143 230 Q150 242 157 230" stroke="#62666A" stroke-width="1.5" fill="none"/>
-                <path d="M125 270 Q150 282 175 270" stroke="#787C7E" stroke-width="1" fill="none"/>
-                <!-- Zone labels -->
-                <text x="150" y="72" text-anchor="middle" fill="#C5A55A" font-family="Outfit,sans-serif" font-size="9" font-weight="500" letter-spacing="1">VERTEX</text>
-                <text x="150" y="110" text-anchor="middle" fill="#A4A8AB" font-family="Outfit,sans-serif" font-size="8" letter-spacing="0.5">ZONES 1-3</text>
-                <text x="68" y="148" text-anchor="middle" fill="#A4A8AB" font-family="Outfit,sans-serif" font-size="7" transform="rotate(-20,68,148)">ZONE FRONTALE</text>
-                <text x="232" y="148" text-anchor="middle" fill="#A4A8AB" font-family="Outfit,sans-serif" font-size="7" transform="rotate(20,232,148)">ZONE FRONTALE</text>
-              </svg>
-            </div>
-            <!-- SIDE VIEW -->
-            <div class="face-plan">
-              <h4>Vue de profil</h4>
-              <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="face-svg">
-                <!-- Head profile outline -->
-                <path d="M180 35 C130 30 90 55 75 100 C65 130 60 160 65 195 C68 215 80 245 95 270 C110 295 130 315 155 340 L165 340 C175 325 185 300 195 275 C210 245 220 210 225 175 C230 140 225 105 210 75 C200 55 190 40 180 35Z" fill="#3A3C3E" stroke="#62666A" stroke-width="1"/>
-                <!-- Zone: Top/Back (scars) -->
-                <path class="face-zone" data-zone="scars" d="M180 37 C200 45 215 65 222 95 C228 120 228 145 225 170 L195 165 C198 140 198 115 195 90 C190 68 185 50 180 37Z" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <!-- Zone: Top of head -->
-                <path class="face-zone" data-zone="density" d="M180 37 C145 32 110 50 90 80 C80 100 72 125 70 150 L105 150 C108 125 115 100 128 80 C140 62 158 45 180 37Z" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <!-- Zone: Small surface (temple area) -->
-                <ellipse class="face-zone" data-zone="small" cx="85" cy="165" rx="20" ry="25" fill="#4E5153" stroke="#62666A" stroke-width="0.5"/>
-                <!-- Ear -->
-                <ellipse cx="220" cy="185" rx="12" ry="22" fill="#3A3C3E" stroke="#62666A" stroke-width="1"/>
-                <!-- Eye -->
-                <ellipse cx="105" cy="190" rx="12" ry="6" fill="#2E3032"/>
-                <!-- Nose -->
-                <path d="M70 200 Q60 230 75 245" stroke="#62666A" stroke-width="1.5" fill="none"/>
-                <!-- Labels -->
-                <text x="140" y="68" text-anchor="middle" fill="#A4A8AB" font-family="Outfit,sans-serif" font-size="8" letter-spacing="0.5">DESSUS</text>
-                <text x="210" y="120" text-anchor="middle" fill="#C5A55A" font-family="Outfit,sans-serif" font-size="8" letter-spacing="0.5">CICATRICES</text>
-                <text x="85" y="200" text-anchor="middle" fill="#A4A8AB" font-family="Outfit,sans-serif" font-size="7">TEMPES</text>
-              </svg>
-            </div>
-          </div>
-          <p class="face-plans-instruction" data-i18n="price_head_instruction">Sélectionnez une zone pour voir le tarif</p>
-        </div>
-        <!-- Pricing cards -->
-        <div class="pricing-cards">
-          <div class="pricing-card" data-zone="density"><div class="pricing-card-header"><h3 data-i18n="price_1_title">Effet Rasé ou Densité</h3><div class="pricing-tag" data-i18n="price_1_price">300 € à 2 000 €</div></div><p class="pricing-card-zones" data-i18n="price_1_zones">Zones 1 à 3</p><p data-i18n="price_1_desc">Selon le travail à réaliser et les zones à restaurer.</p></div>
-          <div class="pricing-card" data-zone="frontal"><div class="pricing-card-header"><h3 data-i18n="price_2_title">Zone frontale et cicatrices de greffe FUE / FUT</h3><div class="pricing-tag" data-i18n="price_2_price">450 € à 1 300 €</div></div><p data-i18n="price_2_desc">Restauration de la zone frontale et des cicatrices post-opératoires pour un résultat naturel.</p></div>
-          <div class="pricing-card" data-zone="crown"><div class="pricing-card-header"><h3 data-i18n="price_3_title">Haut du cuir chevelu + cicatrices post-greffe</h3><div class="pricing-tag" data-i18n="price_3_price">Sur devis</div></div><p data-i18n="price_3_desc">Restauration du haut du cuir chevelu et des cicatrices post-greffe.</p></div>
-          <div class="pricing-card" data-zone="small"><div class="pricing-card-header"><h3 data-i18n="price_4_title">Petites surfaces & Densification</h3><div class="pricing-tag" data-i18n="price_4_price">Sur devis</div></div><p data-i18n="price_4_desc">Traitement ciblé des petites zones et solutions de densification adaptées à tous.</p></div>
-          <div class="pricing-note"><h4 data-i18n="price_payment_title">Modalités de paiement</h4><p data-i18n="price_payment_desc">Le paiement peut être effectué au comptant ou en plusieurs fois, réparti sur votre procédure. Un acompte est demandé afin de bloquer la procédure.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG -->
+    <!-- BLOG -->
   <section class="bg-alt" id="blog">
     <div class="container">
-      <div class="section-header center reveal"><div class="section-label" data-i18n="blog_label">Blog</div><h2 class="section-title" data-i18n="blog_title">Nos derniers <strong>articles</strong></h2><p class="section-subtitle" data-i18n="blog_subtitle">Conseils, actualités et témoignages.</p></div>
-      <div class="blog-grid">
-        <article class="blog-card reveal"><div class="blog-card-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,#D5D8DA,#BEC1C4);display:flex;align-items:center;justify-content:center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="1"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><span class="blog-card-category" data-i18n="blog_1_cat">Guide</span></div><div class="blog-card-body"><div class="blog-card-date" data-i18n="blog_date_1">15 Février 2026</div><h3 data-i18n="blog_1_title">Micropigmentation capillaire : tout ce qu'il faut savoir</h3><p data-i18n="blog_1_excerpt">Un guide complet pour comprendre la procédure.</p><a href="#" class="blog-card-link"><span data-i18n="blog_read">Lire l'article</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></article>
-        <article class="blog-card reveal"><div class="blog-card-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,#BEC1C4,#A4A8AB);display:flex;align-items:center;justify-content:center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="blog-card-category" data-i18n="blog_2_cat">Témoignage</span></div><div class="blog-card-body"><div class="blog-card-date" data-i18n="blog_date_2">2 Janvier 2026</div><h3 data-i18n="blog_2_title">Comment la SMP a transformé ma confiance</h3><p data-i18n="blog_2_excerpt">Découvrez le parcours de l'un de nos clients.</p><a href="#" class="blog-card-link"><span data-i18n="blog_read">Lire l'article</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></article>
-        <article class="blog-card reveal"><div class="blog-card-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,#F5EDD8,#E2CC8B);display:flex;align-items:center;justify-content:center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8B7232" stroke-width="1"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="blog-card-category" data-i18n="blog_3_cat">Conseils</span></div><div class="blog-card-body"><div class="blog-card-date" data-i18n="blog_date_3">18 Décembre 2025</div><h3 data-i18n="blog_3_title">Les soins post-procédure : guide complet</h3><p data-i18n="blog_3_excerpt">Nos conseils pour garantir la longévité.</p><a href="#" class="blog-card-link"><span data-i18n="blog_read">Lire l'article</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></article>
+      <div class="section-header center reveal">
+        <div class="section-label" data-i18n="blog_label">Blog</div>
+        <h2 class="section-title" data-i18n="blog_title"><span class="title-bold">Nos derniers articles</span></h2>
+        <p class="section-subtitle" data-i18n="blog_subtitle">Guides, conseils et repères essentiels pour comprendre la micropigmentation capillaire dans un cadre clair, rassurant et premium.</p>
+      </div>
+      <div class="blog-grid blog-grid-premium">
+        <article class="blog-card reveal">
+          <div class="blog-card-image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#D5D8DA,#BEC1C4);display:flex;align-items:center;justify-content:center">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="1">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <span class="blog-card-category">Guide principal</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">Guide expert</div>
+            <h3>Micropigmentation capillaire : tout ce qu'il faut savoir</h3>
+            <p class="blog-card-excerpt"></p>
+            <div class="blog-card-actions">
+              <button type="button" class="blog-card-link is-button" data-blog-open="guide"><span>Lire l'article</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card reveal">
+          <div class="blog-card-image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#F5EDD8,#E2CC8B);display:flex;align-items:center;justify-content:center">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8B7232" stroke-width="1">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <span class="blog-card-category">Conseils</span>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">Recommandations essentielles</div>
+            <h3>Les soins post-procédure : guide complet</h3>
+            <p class="blog-card-excerpt"></p>
+            <div class="blog-card-actions">
+              <button type="button" class="blog-card-link is-button" data-blog-open="postcare"><span>Lire l'article</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
+
+  <div class="blog-modal" id="blogModal" aria-hidden="true">
+    <div class="blog-modal-panel" role="dialog" aria-modal="true" aria-labelledby="blogModalTitle">
+      <button type="button" class="blog-modal-close" id="blogModalClose" aria-label="Fermer l’article">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="blog-modal-head">
+        <span class="blog-modal-eyebrow" id="blogModalEyebrow">Guide principal</span>
+        <h3 class="blog-modal-title" id="blogModalTitle">Micropigmentation capillaire : tout ce qu’il faut savoir</h3>
+        <p class="blog-modal-sub" id="blogModalSubtitle">Un guide premium pour comprendre la logique de la procédure, les étapes clés et les résultats attendus.</p>
+      </div>
+      <div class="blog-modal-body" id="blogModalBody"></div>
+    </div>
+  </div>
 
   <!-- FAQ -->
   <section class="bg-light" id="faq">
     <div class="container">
-      <div class="section-header center reveal"><div class="section-label" data-i18n="faq_label">Questions fréquentes</div><h2 class="section-title" data-i18n="faq_title">Tout savoir sur la <strong>micropigmentation</strong></h2></div>
+      <div class="section-header center reveal"><div class="section-label" data-i18n="faq_label">Questions fréquentes</div><h2 class="section-title" data-i18n="faq_title"><span class="title-bold">Tout savoir sur la </span><strong>micropigmentation</strong></h2></div>
       <div class="faq-list reveal">
         <div class="faq-item"><button class="faq-question"><span data-i18n="faq_1_q">Qu'est-ce que la micropigmentation capillaire (SMP) ?</span><span class="faq-question-icon"></span></button><div class="faq-answer"><div class="faq-answer-inner" data-i18n="faq_1_a">La micropigmentation capillaire est une technique non chirurgicale qui consiste à déposer des pigments dans la partie supérieure du derme du cuir chevelu pour reproduire l'apparence de follicules pileux.</div></div></div>
         <div class="faq-item"><button class="faq-question"><span data-i18n="faq_2_q">Combien de séances sont nécessaires ?</span><span class="faq-question-icon"></span></button><div class="faq-answer"><div class="faq-answer-inner" data-i18n="faq_2_a">En général, 2 à 3 séances sont nécessaires, espacées de 7 à 14 jours. Dans certains cas, une 4ème séance peut être requise. Toutes les séances sont incluses dans le prix initial.</div></div></div>
@@ -242,18 +614,19 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#accueil" class="logo"><img src="img/logo.png" alt="ScalpCare SMP" style="height:36px;"></a>
+          <a href="#accueil" class="logo"><img src="img/logo.png" alt="Scalpcare" style="height:36px;"></a>
           <p data-i18n="footer_desc">Expert en micropigmentation capillaire. Résultats naturels et durables à Paris et Barcelone. Communication réactive — réponse sous un jour ouvré.</p>
           <div class="footer-social">
             <a href="https://www.instagram.com/scalpcare_smp/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
             <a href="https://tr.ee/dnSKLbgcec" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
           </div>
         </div>
-        <div class="footer-col"><h4 data-i18n="footer_nav">Navigation</h4><ul><li><a href="#accueil" data-i18n="nav_home">Accueil</a></li><li><a href="#about" data-i18n="nav_about">Qui suis-je</a></li><li><a href="#services" data-i18n="nav_services">Notre Offre</a></li><li><a href="#tarifs" data-i18n="nav_pricing">Tarifs</a></li><li><a href="#blog" data-i18n="nav_blog">Blog</a></li><li><a href="#faq" data-i18n="nav_faq">FAQ</a></li></ul></div>
+        <div class="footer-col"><h4 data-i18n="footer_nav">Navigation</h4><ul><li><a href="#accueil" data-i18n="nav_home">Accueil</a></li><li><a href="#about" data-i18n="nav_about">Qui suis-je</a></li><li><a href="#services" data-i18n="nav_services">Notre Offre</a></li><li><a href="tarifs.html" data-i18n="nav_pricing">Tarifs</a>
+        <a href="avant-apres.html" data-i18n="nav_beforeafter">Avant / Après</a></li><li><a href="#blog" data-i18n="nav_blog">Blog</a></li><li><a href="#faq" data-i18n="nav_faq">FAQ</a></li></ul></div>
         <div class="footer-col"><h4 data-i18n="footer_legal">Légal</h4><ul><li><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a></li><li><a href="#" data-i18n="footer_terms">Mentions légales</a></li></ul></div>
         <div class="footer-col footer-locations"><h4 data-i18n="footer_locations_title">Nos cabinets</h4><div class="location-item"><div class="location-item-label" data-i18n="footer_loc_paris">Paris</div><p data-i18n="footer_addr_paris">27 bis rue Charles 4, 94130 Nogent-sur-Marne</p></div><div class="location-item"><div class="location-item-label" data-i18n="footer_loc_barcelona">Barcelona</div><p data-i18n="footer_addr_barcelona">Carrer de Roger de Flor, 172, Eixample, 08013 Barcelona, Espagne</p></div></div>
       </div>
-      <div class="footer-bottom"><p data-i18n="footer_copy">© 2026 ScalpCare SMP. Tous droits réservés.</p><div class="footer-bottom-links"><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a><a href="#" data-i18n="footer_terms">Mentions légales</a></div></div>
+      <div class="footer-bottom"><p data-i18n="footer_copy">© 2026 Scalpcare. Tous droits réservés.</p><div class="footer-bottom-links"><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a><a href="#" data-i18n="footer_terms">Mentions légales</a></div></div>
     </div>
   </footer>
 
@@ -261,38 +634,115 @@
 
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
+  
   <script>
-  // Interactive face zone pricing
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.face-zone').forEach(zone => {
-      zone.addEventListener('mouseenter', () => {
-        const zoneId = zone.dataset.zone;
-        document.querySelectorAll('.face-zone').forEach(z => z.classList.toggle('active', z.dataset.zone === zoneId));
-        document.querySelectorAll('.pricing-card').forEach(c => c.classList.toggle('active', c.dataset.zone === zoneId));
+    (function () {
+      const modal = document.getElementById('blogModal');
+      const closeBtn = document.getElementById('blogModalClose');
+      if (!modal || !closeBtn) return;
+
+      const modalTitle = document.getElementById('blogModalTitle');
+      const modalEyebrow = document.getElementById('blogModalEyebrow');
+      const modalSubtitle = document.getElementById('blogModalSubtitle');
+      const modalBody = document.getElementById('blogModalBody');
+      const body = document.body;
+
+      const articles = {
+        guide: {
+          eyebrow: 'Guide principal',
+          title: 'Micropigmentation capillaire : tout ce qu’il faut savoir',
+          subtitle: 'Un guide premium pour comprendre la logique de la procédure, ses étapes clés et les résultats attendus.',
+          body: `
+            <div>
+              <h4>Objectif de la procédure</h4>
+              <p>La première étape consiste à comprendre vos besoins et vos attentes. Chaque procédure est adaptée à votre situation pour garantir des résultats optimaux. L’objectif est de vous apporter une solution efficace, sécurisée et durable.</p>
+            </div>
+            <div>
+              <h4>Déroulement étape par étape</h4>
+              <ol>
+                <li><strong>Consultation initiale :</strong> analyse de votre situation, identification des besoins et conseils personnalisés.</li>
+                <li><strong>Préparation :</strong> explications détaillées de la procédure, préparation éventuelle et réponses à toutes vos questions.</li>
+                <li><strong>Réalisation :</strong> mise en œuvre de la procédure par des professionnels qualifiés, avec suivi des étapes pour assurer sécurité et efficacité.</li>
+                <li><strong>Suivi post-procédure :</strong> évaluation des résultats, ajustements si nécessaire et conseils pour maintenir les effets obtenus.</li>
+              </ol>
+            </div>
+            <div>
+              <h4>Résultats attendus</h4>
+              <ul>
+                <li>Une ligne frontale progressive et naturelle, adaptée à votre style rasé.</li>
+                <li>Une couronne et un dessus du crâne densifiés, où la calvitie disparaît complètement.</li>
+                <li>Une densité uniforme sur l’ensemble du cuir chevelu, sans zones clairsemées.</li>
+                <li>Un résultat cohérent, naturel et durable, harmonisé avec vos cheveux existants.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Conseils pour maximiser les effets</h4>
+              <ul>
+                <li>Respectez les recommandations données après la procédure.</li>
+                <li>Assurez un suivi régulier selon les conseils de votre professionnel.</li>
+                <li>Contactez votre spécialiste en cas de doute ou pour tout ajustement nécessaire.</li>
+              </ul>
+            </div>`
+        },
+        postcare: {
+          eyebrow: 'Conseils',
+          title: 'Les soins post-procédure : guide complet',
+          subtitle: 'Les gestes essentiels pour accompagner la cicatrisation, préserver le pigment et sécuriser la qualité du résultat.',
+          body: `
+            <div>
+              <h4>Préconisations post-traitement</h4>
+              <ul>
+                <li>Premier lavage doux sans frotter, au minimum 72 heures après la séance, de préférence avec un shampooing au pH neutre.</li>
+                <li>Maintenir une bonne hydratation 2 fois par jour à partir de 72 heures après la séance jusqu’à la suivante.</li>
+                <li>Cela permet de travailler sur une peau plus souple retenant mieux le pigment.</li>
+                <li>Éviter le sport durant 48 heures.</li>
+                <li>Sports de contact et eau chlorée à éviter durant 7 jours.</li>
+                <li>Transpiration excessive, sauna et hammam à éviter durant 10 jours.</li>
+                <li>Éviter l’exposition directe au soleil durant 7 jours, puis appliquer une crème solaire SPF50.</li>
+                <li>Il est conseillé d’utiliser de la crème solaire même après la cicatrisation.</li>
+                <li>Si vous utilisez du minoxidil, l’arrêter 48 heures avant la séance.</li>
+                <li>La reprise du minoxidil est possible 10 jours après la séance.</li>
+                <li>Le respect de toutes les préconisations permet d’optimiser le résultat ainsi que la cicatrisation.</li>
+                <li>Ces soins doivent être effectués avec des mains propres.</li>
+              </ul>
+            </div>`
+        }
+      };
+
+      function openModal(key) {
+        const article = articles[key];
+        if (!article) return;
+        modalEyebrow.textContent = article.eyebrow;
+        modalTitle.textContent = article.title;
+        modalSubtitle.textContent = article.subtitle;
+        modalBody.innerHTML = article.body;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-blog-open]').forEach(btn => {
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          openModal(this.getAttribute('data-blog-open'));
+        });
       });
-      zone.addEventListener('mouseleave', () => {
-        document.querySelectorAll('.face-zone').forEach(z => z.classList.remove('active'));
-        document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('active'));
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) closeModal();
       });
-      zone.addEventListener('click', () => {
-        const zoneId = zone.dataset.zone;
-        const card = document.querySelector(`.pricing-card[data-zone="${zoneId}"]`);
-        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
       });
-    });
-    // Reverse: cards highlight zones
-    document.querySelectorAll('.pricing-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        const z = card.dataset.zone;
-        document.querySelectorAll('.face-zone').forEach(fz => fz.classList.toggle('active', fz.dataset.zone === z));
-        card.classList.add('active');
-      });
-      card.addEventListener('mouseleave', () => {
-        document.querySelectorAll('.face-zone').forEach(fz => fz.classList.remove('active'));
-        card.classList.remove('active');
-      });
-    });
-  });
+    })();
   </script>
+
 </body>
 </html>

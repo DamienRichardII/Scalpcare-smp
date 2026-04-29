@@ -1,0 +1,50 @@
+/*
+ * THEME: Caramel Noir
+ * Fond noir profond (#080808), accent caramel (#B7791F), texte crème (#F8F1E7)
+ * Thème sombre luxueux
+ */
+:root {
+  /* Neutrals → warm dark scale */
+  --nardo:       #9A8878;
+  --nardo-950:   #100A04;
+  --nardo-900:   #1C1208;
+  --nardo-800:   #2A1C0E;
+  --nardo-700:   #3D2A16;
+  --nardo-500:   #7A6050;
+  --nardo-400:   #9A8070;
+  --nardo-300:   #B8A090;
+  --nardo-200:   #D4C4B8;
+  --nardo-100:   #EBE0D8;
+  --nardo-50:    #F5EFE8;
+
+  /* Accent → caramel/amber */
+  --gold:        #B7791F;
+  --gold-dark:   #92610A;
+  --gold-deep:   #78500A;
+  --gold-light:  #D4974A;
+  --gold-shine:  #E8B870;
+  --gold-100:    #FDF0DC;
+  --gold-50:     #FEF7ED;
+  --gold-glow:   rgba(183,121,31,0.18);
+  --gold-subtle: rgba(183,121,31,0.08);
+
+  /* Backgrounds — dark theme */
+  --bg-primary:   #0F0D0A;
+  --bg-secondary: #161208;
+  --bg-card:      #1C1812;
+  --bg-dark:      #080808;
+
+  /* Text */
+  --text-primary:   #F8F1E7;
+  --text-secondary: #D4C5A9;
+  --text-muted:     #A09080;
+  --text-on-dark:   #F8F1E7;
+
+  /* Accent alias */
+  --accent: var(--gold);
+  --gradient-gold: linear-gradient(135deg, #92610A, #D4974A);
+
+  /* Borders */
+  --border-light:  rgba(183,121,31,0.14);
+  --border-medium: rgba(183,121,31,0.24);
+}

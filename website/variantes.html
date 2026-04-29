@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scalpcare — Choisir une variante de couleur</title>
+  <meta name="description" content="Sélectionner une palette graphique pour le site Scalpcare SMP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #0F0F0F;
+      --surface: #161616;
+      --border: rgba(255,255,255,0.08);
+      --text:  #F3F3F0;
+      --muted: #888;
+      --gold:  #C5A55A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Manrope', 'Calibri', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+    .logo-wrap img { height: 36px; }
+    .logo-wrap span { font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; }
+    .back-link {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    /* ── Hero text ── */
+    .page-hero {
+      text-align: center;
+      padding: 80px 32px 60px;
+    }
+    .page-kicker {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Grid ── */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 48px 100px;
+    }
+    @media (max-width: 900px) {
+      .variants-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 80px; }
+      .page-header { padding: 20px 24px; }
+    }
+    @media (max-width: 560px) {
+      .variants-grid { grid-template-columns: 1fr; padding: 0 16px 64px; }
+    }
+
+    /* ── Variant Card ── */
+    .variant-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94),
+                  box-shadow 0.28s cubic-bezier(0.25,0.46,0.45,0.94),
+                  border-color 0.28s;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+    }
+    .variant-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    /* Swatch strip — shows dark hero color */
+    .card-swatch {
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-swatch::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.35));
+    }
+    /* Floating dot pills */
+    .card-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 18px;
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+    .card-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Card body */
+    .card-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .card-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s;
+      align-self: flex-start;
+    }
+    .variant-card:hover .card-cta {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .card-cta svg { transition: transform 0.2s; }
+    .variant-card:hover .card-cta svg { transform: translateX(4px); }
+
+    /* ── Footer ── */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html" class="logo-wrap">
+      <img src="img/logo.png" alt="Scalpcare">
+      <span>Scalpcare</span>
+    </a>
+    <a href="index.html" class="back-link">← Site principal</a>
+  </header>
+
+  <section class="page-hero">
+    <span class="page-kicker">Identité visuelle</span>
+    <h1>Choisissez<br>votre palette graphique</h1>
+    <p>Six déclinaisons chromatiques du même site. Chaque variante conserve l'intégralité du contenu — seule la couleur change.</p>
+  </section>
+
+  <div class="variants-grid">
+
+    <!-- 1. Indigo Blanc Neige -->
+    <a href="variantes/indigo-blanc-neige/index.html" class="variant-card">
+      <div class="card-swatch" style="background:#312E81;">
+        <div class="card-dots">
+          <div class="card-dot" style="background:#312E81;"></div>
+          <div class="card-dot" style="background:#6366F1;"></div>
+          <div class="card-dot" style="background:#FAFAFF; border-color:rgba(49,46,129,0.3);"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-label">Variante 01</span>
+        <h2 class="card-title">Indigo<br>Blanc Neige</h2>
+        <p class="card-desc">Profondeur de l'indigo sur fond blanc neige. Autorité moderne, clarté clinique.</p>
+        <span class="card-cta">
+          Voir la variante
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 2. Caramel Noir -->
+    <a href="variantes/caramel-noir/index.html" class="variant-card">
+      <div class="card-swatch" style="background:#080808;">
+        <div class="card-dots">
+          <div class="card-dot" style="background:#080808;"></div>
+          <div class="card-dot" style="background:#B7791F;"></div>
+          <div class="card-dot" style="background:#F8F1E7; border-color:rgba(183,121,31,0.3);"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-label">Variante 02</span>
+        <h2 class="card-title">Caramel<br>Noir</h2>
+        <p class="card-desc">Fond noir profond, accent caramel ambré. Luxe sombre, exclusivité absolue.</p>
+        <span class="card-cta">
+          Voir la variante
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 3. Crème Gris Nardo -->
+    <a href="variantes/creme-gris-nardo/index.html" class="variant-card">
+      <div class="card-swatch" style="background:#2A2822;">
+        <div class="card-dots">
+          <div class="card-dot" style="background:#2A2822;"></div>
+          <div class="card-dot" style="background:#9C8D78;"></div>
+          <div class="card-dot" style="background:#F4EFE6; border-color:rgba(156,141,120,0.3);"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-label">Variante 03</span>
+        <h2 class="card-title">Crème<br>Gris Nardo</h2>
+        <p class="card-desc">Crème chaud et gris pierre. Douceur éditoriale, élégance apaisée.</p>
+        <span class="card-cta">
+          Voir la variante
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 4. Bordeaux Crème -->
+    <a href="variantes/bordeaux-creme/index.html" class="variant-card">
+      <div class="card-swatch" style="background:#241817;">
+        <div class="card-dots">
+          <div class="card-dot" style="background:#241817;"></div>
+          <div class="card-dot" style="background:#6F1D1B;"></div>
+          <div class="card-dot" style="background:#F7EFE2; border-color:rgba(111,29,27,0.3);"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-label">Variante 04</span>
+        <h2 class="card-title">Bordeaux<br>Crème</h2>
+        <p class="card-desc">Chaleur italienne, bordeaux profond sur crème dorée. Raffinement intemporel.</p>
+        <span class="card-cta">
+          Voir la variante
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 5. Bleu Nuit Blanc Cassé -->
+    <a href="variantes/bleu-nuit-blanc-casse/index.html" class="variant-card">
+      <div class="card-swatch" style="background:#071A2D;">
+        <div class="card-dots">
+          <div class="card-dot" style="background:#071A2D;"></div>
+          <div class="card-dot" style="background:#1E4D8C;"></div>
+          <div class="card-dot" style="background:#F5F1E8; border-color:rgba(30,77,140,0.3);"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-label">Variante 05</span>
+        <h2 class="card-title">Bleu Nuit<br>Blanc Cassé</h2>
+        <p class="card-desc">Nuit marine sur blanc cassé chaud. Confiance médicale, prestige sobre.</p>
+        <span class="card-cta">
+          Voir la variante
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 6. Bleu Roi Blanc Neige -->
+    <a href="variantes/bleu-roi-blanc-neige/index.html" class="variant-card">
+      <div class="card-swatch" style="background:#0F172A;">
+        <div class="card-dots">
+          <div class="card-dot" style="background:#0F172A;"></div>
+          <div class="card-dot" style="background:#1D4ED8;"></div>
+          <div class="card-dot" style="background:#FAFAFF; border-color:rgba(29,78,216,0.3);"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-label">Variante 06</span>
+        <h2 class="card-title">Bleu Roi<br>Blanc Neige</h2>
+        <p class="card-desc">Bleu roi sur blanc neige pur. Clarté clinique, modernité directe.</p>
+        <span class="card-cta">
+          Voir la variante
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="page-footer">
+    <p>Scalpcare SMP — Page interne de sélection des variantes chromatiques</p>
+  </footer>
+
+</body>
+</html>

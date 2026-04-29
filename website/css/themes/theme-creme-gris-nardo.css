@@ -1,0 +1,50 @@
+/*
+ * THEME: Crème Gris Nardo
+ * Fond crème chaud (#F4EFE6), accent gris nardo (#8A8F91), surface ivoire (#FFF9EF)
+ * Variante éditoriale douce et neutre
+ */
+:root {
+  /* Neutrals → warm stone scale */
+  --nardo:       #8A8F91;
+  --nardo-950:   #2A2C2E;
+  --nardo-900:   #383A3C;
+  --nardo-800:   #4C4F51;
+  --nardo-700:   #606466;
+  --nardo-500:   #8E9295;
+  --nardo-400:   #A6AAAC;
+  --nardo-300:   #C0C4C6;
+  --nardo-200:   #D8DBDC;
+  --nardo-100:   #ECEDEF;
+  --nardo-50:    #F5F5F4;
+
+  /* Accent → warm stone/taupe gold */
+  --gold:        #9C8D78;
+  --gold-dark:   #7A6E5A;
+  --gold-deep:   #635848;
+  --gold-light:  #B8AB98;
+  --gold-shine:  #D0C8BA;
+  --gold-100:    #F0EBE2;
+  --gold-50:     #FAF7F2;
+  --gold-glow:   rgba(156,141,120,0.12);
+  --gold-subtle: rgba(156,141,120,0.06);
+
+  /* Backgrounds — crème chaud */
+  --bg-primary:   #F4EFE6;
+  --bg-secondary: #EBE5DA;
+  --bg-card:      #FFF9EF;
+  --bg-dark:      #2A2822;
+
+  /* Text */
+  --text-primary:   #2A2822;
+  --text-secondary: #5C5650;
+  --text-muted:     #8A8680;
+  --text-on-dark:   #F4EFE6;
+
+  /* Accent alias */
+  --accent: var(--gold);
+  --gradient-gold: linear-gradient(135deg, #7A6E5A, #B8AB98);
+
+  /* Borders */
+  --border-light:  rgba(156,141,120,0.12);
+  --border-medium: rgba(156,141,120,0.20);
+}

@@ -1,0 +1,49 @@
+/*
+ * THEME: Indigo Blanc Neige
+ * Accent indigo profond (#312E81 / #6366F1) sur fond blanc neige (#FAFAFF)
+ */
+:root {
+  /* Neutrals → slate-indigo scale */
+  --nardo:       #5B6080;
+  --nardo-950:   #1E1B4B;
+  --nardo-900:   #2E2B5C;
+  --nardo-800:   #3D3A72;
+  --nardo-700:   #4C498A;
+  --nardo-500:   #6366A8;
+  --nardo-400:   #8486BE;
+  --nardo-300:   #A5A7D4;
+  --nardo-200:   #C5C7E6;
+  --nardo-100:   #E0E0F4;
+  --nardo-50:    #F0F0FA;
+
+  /* Accent → indigo/violet */
+  --gold:        #6366F1;
+  --gold-dark:   #4F46E5;
+  --gold-deep:   #3730A3;
+  --gold-light:  #818CF8;
+  --gold-shine:  #A5B4FC;
+  --gold-100:    #E0E7FF;
+  --gold-50:     #EEF2FF;
+  --gold-glow:   rgba(99,102,241,0.12);
+  --gold-subtle: rgba(99,102,241,0.06);
+
+  /* Backgrounds */
+  --bg-primary:   #FAFAFF;
+  --bg-secondary: #EEF2FF;
+  --bg-card:      #FFFFFF;
+  --bg-dark:      #312E81;
+
+  /* Text */
+  --text-primary:   #1E1B4B;
+  --text-secondary: #3730A3;
+  --text-muted:     #6366A8;
+  --text-on-dark:   #EEF2FF;
+
+  /* Accent alias */
+  --accent: var(--gold);
+  --gradient-gold: linear-gradient(135deg, #4F46E5, #818CF8);
+
+  /* Borders */
+  --border-light:  rgba(99,102,241,0.12);
+  --border-medium: rgba(99,102,241,0.20);
+}

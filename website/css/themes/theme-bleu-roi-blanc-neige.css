@@ -1,0 +1,50 @@
+/*
+ * THEME: Bleu Roi Blanc Neige
+ * Fond blanc neige (#FAFAFF), accent bleu roi (#1D4ED8), texte ardoise sombre (#0F172A)
+ * Confiance, clarté, autorité médicale
+ */
+:root {
+  /* Neutrals → slate scale */
+  --nardo:       #64748B;
+  --nardo-950:   #0F172A;
+  --nardo-900:   #1E293B;
+  --nardo-800:   #334155;
+  --nardo-700:   #475569;
+  --nardo-500:   #64748B;
+  --nardo-400:   #94A3B8;
+  --nardo-300:   #CBD5E1;
+  --nardo-200:   #E2E8F0;
+  --nardo-100:   #F1F5F9;
+  --nardo-50:    #F8FAFC;
+
+  /* Accent → royal blue */
+  --gold:        #1D4ED8;
+  --gold-dark:   #1E40AF;
+  --gold-deep:   #1E3A8A;
+  --gold-light:  #3B82F6;
+  --gold-shine:  #60A5FA;
+  --gold-100:    #DBEAFE;
+  --gold-50:     #EFF6FF;
+  --gold-glow:   rgba(29,78,216,0.12);
+  --gold-subtle: rgba(29,78,216,0.06);
+
+  /* Backgrounds — blanc neige */
+  --bg-primary:   #FAFAFF;
+  --bg-secondary: #EEF2FF;
+  --bg-card:      #FFFFFF;
+  --bg-dark:      #0F172A;
+
+  /* Text */
+  --text-primary:   #0F172A;
+  --text-secondary: #334155;
+  --text-muted:     #64748B;
+  --text-on-dark:   #F8FAFC;
+
+  /* Accent alias */
+  --accent: var(--gold);
+  --gradient-gold: linear-gradient(135deg, #1E40AF, #3B82F6);
+
+  /* Borders */
+  --border-light:  rgba(29,78,216,0.10);
+  --border-medium: rgba(29,78,216,0.18);
+}

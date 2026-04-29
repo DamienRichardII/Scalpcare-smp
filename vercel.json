@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "outputDirectory": "website",
+  "trailingSlash": false,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/variantes/:variant", "destination": "/variantes/:variant/index.html" }
+  ]
+}

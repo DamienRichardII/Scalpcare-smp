@@ -1,0 +1,50 @@
+/*
+ * THEME: Bordeaux Crème
+ * Fond crème (#F7EFE2), accent bordeaux (#6F1D1B), texte brun profond (#241817)
+ * Élégance italienne, chaleur raffinée
+ */
+:root {
+  /* Neutrals → warm brown scale */
+  --nardo:       #7A5A52;
+  --nardo-950:   #241817;
+  --nardo-900:   #36231F;
+  --nardo-800:   #4A302B;
+  --nardo-700:   #604038;
+  --nardo-500:   #8A6860;
+  --nardo-400:   #A8887E;
+  --nardo-300:   #C4A89E;
+  --nardo-200:   #DCCAC6;
+  --nardo-100:   #EDE3E0;
+  --nardo-50:    #F7F1EF;
+
+  /* Accent → bordeaux/wine */
+  --gold:        #6F1D1B;
+  --gold-dark:   #581512;
+  --gold-deep:   #450F0E;
+  --gold-light:  #9B3A38;
+  --gold-shine:  #C06060;
+  --gold-100:    #F8E8E8;
+  --gold-50:     #FCF4F4;
+  --gold-glow:   rgba(111,29,27,0.10);
+  --gold-subtle: rgba(111,29,27,0.05);
+
+  /* Backgrounds — crème chaude */
+  --bg-primary:   #F7EFE2;
+  --bg-secondary: #EDE4D4;
+  --bg-card:      #FFFBF5;
+  --bg-dark:      #241817;
+
+  /* Text */
+  --text-primary:   #241817;
+  --text-secondary: #5A3830;
+  --text-muted:     #8A6860;
+  --text-on-dark:   #F7EFE2;
+
+  /* Accent alias */
+  --accent: var(--gold);
+  --gradient-gold: linear-gradient(135deg, #581512, #9B3A38);
+
+  /* Borders */
+  --border-light:  rgba(111,29,27,0.10);
+  --border-medium: rgba(111,29,27,0.18);
+}
